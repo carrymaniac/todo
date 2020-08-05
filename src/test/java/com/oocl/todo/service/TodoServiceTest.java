@@ -37,8 +37,8 @@ class TodoServiceTest {
         List<Todo> all = todoService.getAll();
         //then
         assertTrue(all.size()>0);
-        assertEquals(all.get(0).getId(),1);
-        assertEquals(all.get(0).getContent(),1);
+        assertEquals(1,all.get(0).getId());
+        assertEquals("todo-1",all.get(0).getContent());
         assertFalse(all.get(0).getStatus());
     }
 }
