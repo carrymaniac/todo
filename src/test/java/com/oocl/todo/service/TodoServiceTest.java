@@ -25,7 +25,7 @@ class TodoServiceTest {
     @BeforeEach
     private void init(){
         todoRepository = Mockito.mock(TodoRepository.class);
-        Todo todo = new Todo(1, "todo-1", false);
+        Todo todo = new Todo(1, "todo-1", true);
         when(todoRepository.findAll())
                 .thenReturn(Arrays.asList(
                         new Todo(1,"todo-1",false),
