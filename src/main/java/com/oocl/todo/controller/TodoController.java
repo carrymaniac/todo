@@ -38,6 +38,13 @@ public class TodoController {
         }
         return todoService.addTodo(todo);
     }
+    @PostMapping()
+    public Object updateTodo(@RequestBody @Validated Todo todo, BindingResult result){
+        if(result.hasErrors()){
+            return result.getFieldError().getDefaultMessage();
+        }
+        return todoService.updateTodo(todo);
+    }
 
 
 }
