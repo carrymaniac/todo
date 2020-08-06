@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -50,5 +51,19 @@ public class TodoControllerIntegrationTest {
                 .andExpect(jsonPath("$").value(true));
         Optional<Todo> todoOptional = todoRepository.findById(saveTodos.get(0).getId());
         assertFalse(todoOptional.isPresent());
+    }
+
+    @Test
+    void should_add_todo_when_hit_put_todo_given_todo() throws Exception {
+        //given
+        //when
+        mockMvc.perform(put("/todos").
+                contentType(MediaType.APPLICATION_JSON).
+                content("{\"id\":0,\"content\":\"str\",\"status\":true}"))
+        //then
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.content").value("str"))
+                .andExpect(jsonPath("$.status").value(false));
     }
 }
