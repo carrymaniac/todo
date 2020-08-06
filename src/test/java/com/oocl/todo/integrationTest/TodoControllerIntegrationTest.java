@@ -59,7 +59,7 @@ public class TodoControllerIntegrationTest {
         //when
         mockMvc.perform(put("/todos").
                 contentType(MediaType.APPLICATION_JSON).
-                content("{\"id\":0,\"content\":\"str\",\"status\":true}"))
+                content("{\"id\":0,\"content\":\"str\",\"status\":false}"))
         //then
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").isNumber())

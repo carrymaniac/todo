@@ -2,7 +2,10 @@ package com.oocl.todo.controller;
 
 import com.oocl.todo.entity.Todo;
 import com.oocl.todo.service.TodoService;
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +28,15 @@ public class TodoController {
     @DeleteMapping("/{id}")
     public Boolean deleteTodo(@PathVariable("id") @NotNull Integer todoId){
         return todoService.deleteTodo(todoId);
+    }
+
+    @PutMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public Object addTodo(@RequestBody @Validated Todo todo, BindingResult result){
+        if(result.hasErrors()){
+            return result.getFieldError().getDefaultMessage();
+        }
+        return todoService.addTodo(todo);
     }
 
 
