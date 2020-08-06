@@ -10,7 +10,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -33,5 +35,20 @@ public class TodoControllerIntegrationTest {
         //then
                 .andExpect(jsonPath("$.length()").value(saveTodos.size()))
                 .andExpect(jsonPath("$[0].content").value(saveTodos.get(0).getContent()));
+    }
+
+    @Test
+    void should_delete_todo_list_when_hit_delete_todo_given_todo_id() throws Exception {
+        //given
+        List<Todo> todos = Arrays.asList(new Todo(1, "todo-1", false),
+                new Todo(2, "todo-2", false),
+                new Todo(3, "todo-3", true));
+        List<Todo> saveTodos = todoRepository.saveAll(todos);
+        //when
+        mockMvc.perform(delete("/todos/"+saveTodos.get(0).getId()))
+        //then
+                .andExpect(jsonPath("$.id").value(saveTodos.get(0).getId()));
+        Optional<Todo> todoOptional = todoRepository.findById(saveTodos.get(0).getId());
+        assertFalse(todoOptional.isPresent());
     }
 }
