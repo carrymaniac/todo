@@ -24,4 +24,9 @@ public class TodoServiceImpl implements TodoService{
     public Todo addTodo(Todo todo) {
         return todoRepository.save(todo);
     }
+
+    @Override
+    public Todo deleteTodo(Integer todoId) {
+        return null;
+    }
 }

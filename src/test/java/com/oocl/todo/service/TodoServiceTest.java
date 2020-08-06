@@ -56,5 +56,13 @@ class TodoServiceTest {
         assertEquals(todo.getContent(),saveTodo.getContent());
     }
 
-
+    @Test
+    void should_delete_todo_when_delete_todo_given_todo_id() {
+        //given
+        Integer todoId = 1;
+        //when
+        Todo deleteTodo = todoService.deleteTodo(todoId);
+        //then
+        assertNotNull(deleteTodo);
+    }
 }

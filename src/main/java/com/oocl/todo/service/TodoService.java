@@ -8,4 +8,6 @@ public interface TodoService {
     List<Todo> getAll();
 
     Todo addTodo(Todo todo);
+
+    Todo deleteTodo(Integer todoId);
 }
