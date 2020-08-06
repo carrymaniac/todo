@@ -9,5 +9,5 @@ public interface TodoService {
 
     Todo addTodo(Todo todo);
 
-    Todo deleteTodo(Integer todoId);
+    Boolean deleteTodo(Integer todoId);
 }

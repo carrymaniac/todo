@@ -7,12 +7,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -61,8 +63,8 @@ class TodoServiceTest {
         //given
         Integer todoId = 1;
         //when
-        Todo deleteTodo = todoService.deleteTodo(todoId);
+        todoService.deleteTodo(todoId);
         //then
-        assertNotNull(deleteTodo);
+        verify(todoRepository).deleteById(todoId);
     }
 }

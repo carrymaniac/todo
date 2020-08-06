@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoServiceImpl implements TodoService{
@@ -26,7 +27,9 @@ public class TodoServiceImpl implements TodoService{
     }
 
     @Override
-    public Todo deleteTodo(Integer todoId) {
-        return null;
+    public Boolean deleteTodo(Integer todoId) {
+        todoRepository.deleteById(todoId);
+        Optional<Todo> todoOptional = todoRepository.findById(todoId);
+        return !todoOptional.isPresent();
     }
 }
