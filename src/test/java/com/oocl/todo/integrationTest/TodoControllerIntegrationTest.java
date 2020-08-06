@@ -4,6 +4,7 @@ import com.oocl.todo.entity.Todo;
 import com.oocl.todo.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -14,6 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 public class TodoControllerIntegrationTest {
     @Autowired
     TodoRepository todoRepository;
@@ -29,7 +31,7 @@ public class TodoControllerIntegrationTest {
         //when
         mockMvc.perform(get("/todos"))
         //then
-                .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].content").value("todo-2"));
+                .andExpect(jsonPath("$.length()").value(saveTodos.size()))
+                .andExpect(jsonPath("$[0].content").value(saveTodos.get(0).getContent()));
     }
 }
