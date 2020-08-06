@@ -47,7 +47,7 @@ public class TodoControllerIntegrationTest {
         //when
         mockMvc.perform(delete("/todos/"+saveTodos.get(0).getId()))
         //then
-                .andExpect(jsonPath("$.id").value(saveTodos.get(0).getId()));
+                .andExpect(jsonPath("$").value(true));
         Optional<Todo> todoOptional = todoRepository.findById(saveTodos.get(0).getId());
         assertFalse(todoOptional.isPresent());
     }
