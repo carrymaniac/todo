@@ -10,4 +10,7 @@ public interface TodoService {
     Todo addTodo(Todo todo);
 
     Boolean deleteTodo(Integer todoId);
+
+    Todo updateTodo(Todo todo);
+
 }

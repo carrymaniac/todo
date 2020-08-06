@@ -67,4 +67,16 @@ class TodoServiceTest {
         //then
         verify(todoRepository).deleteById(todoId);
     }
+
+    @Test
+    void should_update_todo_when_update_todo_given_todo() {
+        //given
+        Todo todo = new Todo(1, "todo-1", true);
+        //when
+        Todo saveTodo = todoService.updateTodo(todo);
+        //then
+        verify(todoRepository).save(todo);
+        assertNotNull(saveTodo);
+        assertEquals(todo.getStatus(),saveTodo.getStatus());
+    }
 }

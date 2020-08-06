@@ -32,4 +32,9 @@ public class TodoServiceImpl implements TodoService{
         Optional<Todo> todoOptional = todoRepository.findById(todoId);
         return !todoOptional.isPresent();
     }
+
+    @Override
+    public Todo updateTodo(Todo todo) {
+        return null;
+    }
 }
