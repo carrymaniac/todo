@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -65,5 +65,27 @@ public class TodoControllerIntegrationTest {
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.content").value("str"))
                 .andExpect(jsonPath("$.status").value(false));
+    }
+
+    @Test
+    void should_update_todo_when_post_todo_given_todo() throws Exception {
+        //given
+        List<Todo> todos = Arrays.asList(new Todo(1, "todo-1", false),
+                new Todo(2, "todo-2", false),
+                new Todo(3, "todo-3", true));
+        List<Todo> saveTodos = todoRepository.saveAll(todos);
+        //when
+        mockMvc.perform(post("/todos").
+                contentType(MediaType.APPLICATION_JSON).
+                content("{\"id\":1,\"content\":\"todo-1-have-change\",\"status\":false}"))
+                //then
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.content").value("todo-1-have-change"))
+                .andExpect(jsonPath("$.status").value(false));
+        Optional<Todo> byId = todoRepository.findById(1);
+        assertTrue(byId.isPresent());
+        assertEquals(1,byId.get().getId());
+        assertEquals("todo-1-have-change",byId.get().getContent());
     }
 }
