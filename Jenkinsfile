@@ -19,7 +19,7 @@ pipeline {
     stage('deploy') {
       steps {
         echo 'deploy'
-        bat "copy build/libs/*.jar /"
+        bat "copy build\\libs\\*.jar d:\\deploy\\"
       }
     }
   }
