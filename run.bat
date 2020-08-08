@@ -6,4 +6,4 @@ if not "%pid%" == "" (
 )
 
 cd d:\deploy
-start /b java -jar todo-0.0.1-SNAPSHOTT.jar
+start /b java -jar d:\deploy\todo-0.0.1-SNAPSHOTT.jar
