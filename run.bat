@@ -5,5 +5,4 @@ if not "%pid%" == "" (
   rem echo Server is not running.
 )
 
-cd d:\deploy
-start /b java -jar d:\deploy\todo-0.0.1-SNAPSHOTT.jar
+java -jar d:\deploy\todo-0.0.1-SNAPSHOTT.jar
