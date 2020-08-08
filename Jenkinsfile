@@ -20,6 +20,7 @@ pipeline {
       steps {
         echo 'deploy'
         bat "copy build\\libs\\*.jar d:\\deploy\\"
+        bat "run.bat"
       }
     }
   }
