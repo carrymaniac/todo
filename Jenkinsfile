@@ -7,15 +7,13 @@ pipeline {
     stage('test') {
       steps {
         echo 'test'
-        sh '#!/bin/bash -ilex'
-        sh 'gradle test'
+        sh 'gradlew test'
       }
     }
     stage('build') {
       steps {
         echo 'build'
-        sh '#!/bin/bash -ilex'
-        sh 'gradle build'
+        sh 'gradlew build'
       }
     }
     stage('deploy') {
