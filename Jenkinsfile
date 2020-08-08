@@ -7,19 +7,19 @@ pipeline {
     stage('test') {
       steps {
         echo 'test'
-        bat 'gradle test'
+        sh 'gradle test'
       }
     }
     stage('build') {
       steps {
         echo 'build'
-        bat 'gradle build'
+        sh 'gradle build'
       }
     }
     stage('deploy') {
       steps {
         echo 'deploy'
-        bat "cp build/libs/*.jar /"
+        sh "cp build/libs/*.jar /"
       }
     }
   }
