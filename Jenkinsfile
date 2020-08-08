@@ -7,19 +7,21 @@ pipeline {
     stage('test') {
       steps {
         echo 'test'
-        bat 'gradle test'
+        sh '#!/bin/bash -ilex'
+        sh 'gradle test'
       }
     }
     stage('build') {
       steps {
         echo 'build'
-        bat 'gradle build'
+        sh '#!/bin/bash -ilex'
+        sh 'gradle build'
       }
     }
     stage('deploy') {
       steps {
         echo 'deploy'
-        bat "cp build/libs/*.jar /"
+        sh "cp build/libs/*.jar /"
       }
     }
   }
