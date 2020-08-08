@@ -15,7 +15,7 @@ pipeline {
     //     echo 'build'
     //     bat './gradlew build'
     //   }
-    }
+    // }
     stage('deploy') {
       steps {
         echo 'deploy'
